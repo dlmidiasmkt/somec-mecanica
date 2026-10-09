@@ -244,3 +244,23 @@
     revealEls.forEach(el => ob.observe(el));
   }
 })();
+
+/* Carrossel de avaliações no celular: contador e pontos */
+(() => {
+  const track = document.querySelector('.review-track');
+  const dots = document.querySelector('.review-dots');
+  const count = document.querySelector('.review-count');
+  if (!track || !dots) return;
+  const cards = [...track.children];
+  cards.forEach(() => dots.appendChild(document.createElement('i')));
+  const update = () => {
+    const x = track.scrollLeft;
+    let k = 0, best = Infinity;
+    cards.forEach((c, i) => { const d = Math.abs(c.offsetLeft - track.offsetLeft - x - parseFloat(getComputedStyle(track).paddingLeft || 0)); if (d < best) { best = d; k = i; } });
+    if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 4) k = cards.length - 1;
+    [...dots.children].forEach((d, i) => d.classList.toggle('on', i === k));
+    count.textContent = `${k + 1} / ${cards.length}`;
+  };
+  track.addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
+  update();
+})();
