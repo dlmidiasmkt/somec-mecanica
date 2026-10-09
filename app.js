@@ -135,7 +135,9 @@
     intro.style.visibility = io <= 0 ? 'hidden' : 'visible';
 
     // Fechamento
-    const oo = span(p, .88, .95);
+    // some quando o hero começa a sair da tela (não passa por baixo do topo)
+    const leave = clamp((innerHeight - r.bottom) / (innerHeight * .22));
+    const oo = span(p, .88, .95) * (1 - leave);
     outro.style.opacity = oo;
     outro.style.transform = `translateY(${(1 - oo) * 24}px)`;
     outro.style.visibility = oo <= 0 ? 'hidden' : 'visible';
