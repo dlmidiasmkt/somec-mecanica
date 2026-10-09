@@ -901,3 +901,10 @@ p { margin: 0; }
 @media (max-width: 860px) {
   .review-feature::after { top: 8px; bottom: auto; font-size: 5rem; line-height: 1; }
 }
+
+/* Botão flutuante compacto no celular: não cobre o texto */
+@media (max-width: 860px) {
+  .wa-float { width: 58px; height: 58px; padding: 0; justify-content: center; border-radius: 50%; right: 14px; bottom: max(14px, env(safe-area-inset-bottom)); }
+  .wa-float span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .wa-float svg { width: 28px; height: 28px; }
+}
